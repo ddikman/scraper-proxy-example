@@ -14,16 +14,30 @@ function removeVercelHeaders(headers) {
   return newHeaders
 }
 
+function getForwardedIp(forwardHeader) {
+  if (forwardHeader) {
+    const forwardedValues = headers.forwarded.split(';')
+    const forwarded = {}
+    for (const part of forwardedValues) {
+      const [key, value] = part.split('=')
+      forwarded[key] = value
+    }
+    return forwarded['for']
+  }
+  return null
+}
+
 export default async function handler(request, response) {
 
     const query = { ...request.query }
     const headers = removeVercelHeaders(request.headers)
     console.log({ 'query': query, 'headers': headers })
 
+    const ip = getForwardedIp(headers.forwarded)
     const { data, error } = await supabase
     .from('Requests')
     .insert([
-      { 'headers': JSON.stringify(headers), 'query': JSON.stringify(query) },
+      { 'headers': JSON.stringify(headers), 'query': JSON.stringify(query), 'ip': ip },
     ])
 
     if (error) {
