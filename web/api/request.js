@@ -16,7 +16,7 @@ function removeVercelHeaders(headers) {
 
 function getForwardedIp(forwardHeader) {
   if (forwardHeader) {
-    const forwardedValues = headers.forwarded.split(';')
+    const forwardedValues = forwardHeader.split(';')
     const forwarded = {}
     for (const part of forwardedValues) {
       const [key, value] = part.split('=')
