@@ -34,7 +34,7 @@ export default async function handler(request, response) {
 
     let message = 'Saved!'
     if (query.status_code) {
-      response.setStatus(query.status_code)
+      response.statusCode = query.status_code
       message = 'Saved with status code: ' + query.status_code
     }
 
