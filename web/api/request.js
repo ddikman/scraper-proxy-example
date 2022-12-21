@@ -32,7 +32,13 @@ export default async function handler(request, response) {
       console.log("Saved new entry")
     }
 
+    let message = 'Saved!'
+    if (query.status_code) {
+      response.setStatus(query.status_code)
+      message = 'Saved with status code: ' + query.status_code
+    }
+
     response.setHeader('Access-Control-Allow-Origin', '*')
-    return response.end("Saved!");
+    return response.end(message);
   }
   
