@@ -5,6 +5,15 @@
 
 <script setup>
 
+import { ref, onMounted } from 'vue'
+
+const calls = ref([])
+
+onMounted(async () => {
+  const response = await fetch('/api/calls')
+  calls.value = await response.json()
+})
+
 </script>
 
 <style>
