@@ -1,4 +1,6 @@
-# Scraper Proxy Example
+# Scraper Proxy Example (ARCHIVED)
+
+**Archive note:** This was archived as it requires a supabase database to be running.
 
 Example of how to use Scrapy with a rotating proxy, a test project which you can run your test against as well.
 
